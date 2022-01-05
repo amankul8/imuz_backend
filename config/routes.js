@@ -25,14 +25,15 @@ appRouter.use("/friends", friendsRouter);
 userRouter.get("/", userController.getAllUsers);
 userRouter.get("/user/:id", userController.getUserById);
 
-userRouter.get("user/auth/authentication", userController.authenticationUser);
-userRouter.post("user/auth/registration", jsonParser, userController.createUser);
-userRouter.get("user/auth/forget_password", userController.forgetUserPassword);
+userRouter.get("/user/auth/authentication", userController.authenticationUser);
+userRouter.post("/user/auth/registration", jsonParser, userController.createUser);
+userRouter.get("/ser/auth/forget_password", userController.forgetUserPassword);
 
 
 
 //--------------------musics-------------------------------
 musicRouter.get("/", musicsController.getAllMusics);
+musicRouter.post("/add", musicsController.addMusic);
 
 //-------------------playList------------------------------
 plRouter.get("/", musicsController.getPlayListMusics);

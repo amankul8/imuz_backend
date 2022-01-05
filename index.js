@@ -1,7 +1,7 @@
 const express = require('express');
 const router = require("./config/routes");
 const app = express();
-const appConfig = require("./config/app");
+const config = require("./config/app");
 const mongoose = require("mongoose");
 
 const corsMiddleware = (req, res, next) => {
@@ -27,14 +27,4 @@ app.use("", (request, response)=>{
     response.send("Error 404");
 });
 
-async function startApp() {
-    const url = "mongodb+srv://root:root@cluster0.wky2j.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
-    try {
-        await mongoose.connect(url, {useUnifiedTopology: true, useNewUrlParser: true });
-        app.listen(appConfig.port, () => console.log('SERVER STARTED ON PORT: '+appConfig.port));
-    } catch (e) {
-        console.log(e);
-    }
-}
-
-startApp();
+app.listen(config.port, () => console.log('SERVER STARTED ON PORT: '+config.port));

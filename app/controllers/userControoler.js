@@ -1,9 +1,11 @@
+let user_services = require("./../services/UsersServices");
+
 
 class UserController{
 
     async getAllUsers(request, response){
-        let users = {users: []}
-        response.status(200).json(users);
+        let result = await user_services.get_all_users();
+        response.json(result);
     }
 
     async getUserById(request, response){
@@ -11,14 +13,21 @@ class UserController{
         response.status(200).json(user);
     }
 
-    async createUser(request, response){
+    async getUser(request, response){
         let user = {id: 1, name: ""};
         response.status(200).json(user);
     }
 
+    async createUser(request, response){
+        let data = request.body;
+        console.log(data)
+        //let result = await user_services.create_user({nickname: "Tom", email: "Tom@gmail.com", password: "tom_tom"});
+        response.status(201).json({ok: "ok"});
+    }
+
     async authenticationUser(request, response){
-        let user = {id: 1, name: ""};
-        response.status(200).json(user);
+        let data = request.query;
+        response.status(200).json(data);
     }
 
     async forgetUserPassword(request, response){
