@@ -20,14 +20,29 @@ class UserController{
 
     async createUser(request, response){
         let data = request.body;
-        console.log(data)
-        //let result = await user_services.create_user({nickname: "Tom", email: "Tom@gmail.com", password: "tom_tom"});
-        response.status(201).json({ok: "ok"});
+        if(data.nickname!=="" && data.email!=="" && data.password!==""){
+            let result = await user_services.create_user({nickname: data.nickname, email: data.email, password: data.password});
+            if(result.st_code === 201){
+                response.status(201).json(result.result);
+            }else{
+                response.status(202).json(result.result);
+            }
+        }else{
+            response.status(400).json({message: "Data is incomplete !"});
+        }
     }
 
     async authenticationUser(request, response){
-        let data = request.query;
-        response.status(200).json(data);
+        if(request.body.nickname!=="" && request.body.password!==""){
+            let result = await user_services.get_user(request.body);
+            if(result!==undefined){
+                response.status(200).json(result);
+            }else{
+                response.status(400).json({message: "Error"});
+            }
+        }else{
+            response.status(400);
+        }
     }
 
     async forgetUserPassword(request, response){

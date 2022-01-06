@@ -25,7 +25,7 @@ appRouter.use("/friends", friendsRouter);
 userRouter.get("/", userController.getAllUsers);
 userRouter.get("/user/:id", userController.getUserById);
 
-userRouter.get("/user/auth/authentication", userController.authenticationUser);
+userRouter.post("/user/auth/authentication", jsonParser, userController.authenticationUser);
 userRouter.post("/user/auth/registration", jsonParser, userController.createUser);
 userRouter.get("/ser/auth/forget_password", userController.forgetUserPassword);
 
