@@ -13,6 +13,11 @@ const User = new mongoose.Schema({
         type: String,
         required: true
     },
+    image:{
+        type: String,
+        required: false,
+        default: ""
+    },
     createDate: {
         type: Date,
         required: false,
@@ -28,7 +33,7 @@ const User = new mongoose.Schema({
     },
     active: {
         type: Boolean,
-        default: false,
+        default: true,
         required: false
     },
 }, { versionKey: false });

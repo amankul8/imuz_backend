@@ -25,9 +25,10 @@ appRouter.use("/friends", friendsRouter);
 userRouter.get("/", userController.getAllUsers);
 userRouter.get("/user/:id", userController.getUserById);
 
+
 userRouter.post("/user/auth/authentication", jsonParser, userController.authenticationUser);
 userRouter.post("/user/auth/registration", jsonParser, userController.createUser);
-userRouter.get("/ser/auth/forget_password", userController.forgetUserPassword);
+userRouter.post("/user/auth/forget_password", userController.forgetUserPassword);
 
 
 
@@ -43,7 +44,7 @@ searchRouter.get("/", searchController.getGeneralSearchResult);
 
 //------------------friends-------------------------------
 friendsRouter.get("/", userController.getAllFriends);
-friendsRouter.post("/user/friend/add", jsonParser, userController.addToFriend);
+friendsRouter.post("/add", jsonParser, userController.addToFriend);
 
 appRouter.get("", (request,response)=>{
     response.send("Error 404");
